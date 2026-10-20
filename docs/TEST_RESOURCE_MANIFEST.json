@@ -1,0 +1,117 @@
+{
+  "project": "BridgeIntent",
+  "status": "schema-v2 is deployed at 0x6d253BE5ABf1e490d004FaB72379CFE54a27B2c3 with byte-for-byte source parity; two-wallet live authorization/fail-closed/replay cases and public Across MATCH, DIVERGED, and prompt-injection DIVERGED are verified; browser wallet/UI reconciliation remains unverified",
+  "currentLocalSchema": "bridgeintent/2",
+  "publicVerificationBoundary": "Any wallet may register public source-chain transaction hashes. The contract verifies the deposit and fill are linked, including that both events report the same depositor; the submitter is not authenticated as that depositor and no ownership, prospective intent, solvency, or entitlement claim is made.",
+  "network": {
+    "assessment": "GenLayer StudioNet",
+    "chainId": 61999,
+    "originDestinationSources": [
+      { "chainId": 42161, "name": "Arbitrum One", "rpc": "https://arb1.arbitrum.io/rpc", "spokePool": "0xe35e9842fceaca96570b734083f4a58e8f7c5f2a" },
+      { "chainId": 8453, "name": "Base", "rpc": "https://mainnet.base.org", "spokePool": "0x09aea4b2242abc8bb4bb78d537a67a245a7bec64" }
+    ]
+  },
+  "protocolEvents": {
+    "deposit": { "name": "V3FundsDeposited (legacy)", "topic0": "0xa123dc29aebf7d0c3322c8eeb5b999e859f39937950ed31056532713d0de396f" },
+    "fill": { "name": "FilledV3Relay (legacy)", "topic0": "0x571749edf1d5c9599318cdbc4e28a6475d65e87fd3b2ddbe1e9a8d5e7a0f0ff7" }
+  },
+  "currentProtocolEvents": {
+    "deposit": { "name": "FundsDeposited(bytes32,bytes32,uint256,uint256,uint256,uint256,uint32,uint32,uint32,bytes32,bytes32,bytes32,bytes)", "topic0": "0x32ed1a409ef04c7b0227189c3a103dc5ac10e775a15b785dcc510201f7c25ad3" },
+    "fill": { "name": "FilledRelay(bytes32,bytes32,uint256,uint256,uint256,uint256,uint256,uint32,uint32,bytes32,bytes32,bytes32,bytes32,bytes32,(bytes32,bytes32,uint256,uint8))", "topic0": "0x44b559f101f8fbcc8a0ea43fa91a05a729a5ea6e14a7c75aa750374690137208" }
+  },
+  "documentedExamples": {
+    "depositTx": "0x56a86610aad2a653161c9dd4b4972f948198fd02ae9589cfac1d57bd86a156c1",
+    "fillTx": "0x7965d6064d8bee154d1c5471672180f5f802f789e22f66d54102a2010121a93e",
+    "evidenceStatus": "Independently verified from public Arbitrum/Base RPC and used in a live GenLayer schema-v2 assessment. The two finalized receipts match on deposit ID, route, depositor, and required relay fields; wallet B received ASSESSED/MATCH. This does not prove submitter ownership, prospective intent, solvency, or recoverability."
+  },
+  "verificationPerformed": [
+    "CPython helper tests exercise actual event-decode helpers with synthetic ABI words.",
+    "Local fake-runtime tests execute actual contract methods and state transitions for ownership, independent assessors, nonce replay, and fail-closed conflicts.",
+    "GenLayer gltest Direct Mode tests execute the actual contract entrypoints with synthetic JSON-RPC receipts and mocked LLM output; these are simulation fixtures, not live source evidence.",
+    "Current Across FundsDeposited/FilledRelay and legacy V3FundsDeposited/FilledV3Relay decoders are covered by Direct Mode tests. The fill decoder uses relayExecutionInfo's effective recipient, message hash, output amount, and fill type rather than stale base relay fields; a regression fixture intentionally differs in recipient and amount.",
+    "Source deposit message commitments are checked against the fill's base message/hash before semantic review. Regression coverage rejects a mismatched message. Legacy dynamic event bytes require canonical offsets, zero padding, bounded length, and no trailing data; message payloads are never forwarded to the semantic prompt.",
+    "A Direct Mode regression test uses an event depositor different from the case submitter and verifies the linked public pair can be assessed without conflating their identities; this uses synthetic receipts and mocked judgment, not live GenLayer execution.",
+    "genvm-lint check contracts/bridge_intent.py --json reports lint and validation success (7 methods: 4 views, 3 writes).",
+    "TypeScript and Vite production build completed successfully after installing package.json dependencies; bundle output warns that the main JavaScript chunk is above 500 kB.",
+    "Frontend uses genlayer-js, requires a wallet signature, waits for FINALIZED and successful leader execution, then reads state back."
+  ],
+  "liveSchemaV2": {
+    "date": "2026-10-20",
+    "contract": "0x6d253BE5ABf1e490d004FaB72379CFE54a27B2c3",
+    "schema": "bridgeintent/2",
+    "sourceParity": { "byteForByte": true, "byteLength": 26761, "sha256": "9c2e8881666ad1408e9bab43f5e0cebf2c26dbb42fe792121ef34b4eeeed7c37" },
+    "negativeAndAuthorizationEvidence": "docs/live-evidence/studionet-20261020042745.json",
+    "publicPairEvidence": "docs/live-evidence/public-across-20261020043216.json",
+    "publicPairAssessment": { "status": "ASSESSED", "verdict": "MATCH", "assessmentId": "67298bf18b42a9df5ccad08ae388580119679042d5f8ddecc7ec1ef0f3fdb72b" },
+    "semanticOutcomes": {
+      "match": { "evidence": "docs/live-evidence/public-across-20261020043216.json", "tx": "0x3f5b35f0f83c86ec26fd2730ad39a1c8f615f90bbad70989ca13c9d28505d126", "verdict": "MATCH" },
+      "diverged": { "evidence": "docs/live-evidence/public-across-20261020044455.json", "tx": "0xeb50cdbf8cf5a90c0c9b56de61ead601f2f13c1ad0044d1ae459dcd7cffd4a4f", "verdict": "DIVERGED" },
+      "promptInjection": { "evidence": "docs/live-evidence/public-across-20261020043557.json", "tx": "0x7e198b939b8f92f85b713df04b29dbb856b7df60f276d534589bd1f7f01f5457", "verdict": "DIVERGED" }
+    },
+    "notYetVerified": [
+      "Browser verification of wallet A creator/binder, wallet B independent assessor, a third reviewer wallet, and UI-to-finalized-readback reconciliation."
+    ]
+  },
+  "liveSdkAttempt": {
+    "date": "2026-10-20",
+    "contract": "0x9c0793611af6F7A0ee6dC469EB08f8F76401779a",
+    "schema": "bridgeintent/1",
+    "walletA": "0xeb57bc7125fa60d7482CE12058397369AB3581f8",
+    "walletB": "0x2da5393d7BBb9A037dc3abB56DbbC5C150fc843f",
+    "transactions": {
+      "createIntent": { "hash": "0x0439fb9c1d3ed14ba8a4e99d2d69436a24cd36630e3d8ced7b799c8fa3c97ba6", "status": "FINALIZED", "leaderExecution": "SUCCESS", "consensus": "MAJORITY_AGREE" },
+      "bindDeliberatelyInvalidEvidence": { "hash": "0xe8fe6ffd717bae27bd5bdb881b0c69f3b8225b56aee1301e6fb4e0c5ab541d9a", "status": "FINALIZED", "leaderExecution": "SUCCESS", "consensus": "MAJORITY_AGREE" },
+      "assessInvalidEvidence": { "hash": "0x0823c273bf5590b74ef1892e83b777826e2d5a89ef58be7f904ee81599d01e2d", "status": "FINALIZED", "leaderExecution": "ERROR", "consensus": "MAJORITY_AGREE", "error": "exit_code 1: storage dataclass read from inside strict_eq callback" }
+    },
+    "limitation": "The assessment was an intentionally invalid-hash failure-path probe, not a valid Across receipt pair or happy-path E2E. Existing deployed bytecode is unchanged by the local source fix."
+  },
+  "liveSdkRunPatchedDeployment": {
+    "date": "2026-10-20",
+    "contract": "0x5C893d0aAD68Cc5EaF9a0953C57CFea0F93B7E14",
+    "schema": "bridgeintent/1",
+    "sourceParity": {
+      "byteForByte": true,
+      "sha256": "d5490b8ab6748b3348edbefb0fb6c20baba0a7e2d2797d4b3886a33fdc6ed0a6",
+      "byteLength": 23209,
+      "scope": "This was checked against the local source at test time, before current FundsDeposited/FilledRelay support was added. Current local source intentionally differs from this already-deployed address."
+    },
+    "walletA": "0xeb57bc7125fa60d7482CE12058397369AB3581f8",
+    "walletB": "0x2da5393d7BBb9A037dc3abB56DbbC5C150fc843f",
+    "transactions": {
+      "createIntent": { "hash": "0x4b1754509e88e3fbea4cfcf843d8d9f7a3a35b0b15658a61bd438d5e75c642e1", "status": "FINALIZED", "execution": "SUCCESS", "explorer": "https://explorer-studio.genlayer.com/tx/0x4b1754509e88e3fbea4cfcf843d8d9f7a3a35b0b15658a61bd438d5e75c642e1" },
+      "unauthorizedWalletBCannotBind": { "hash": "0x32519cce945e3390adcb57fb0e0c3dbd7d83b56568e11a20f3edbee967fa8022", "status": "FINALIZED", "execution": "ERROR/ROLLBACK", "explorer": "https://explorer-studio.genlayer.com/tx/0x32519cce945e3390adcb57fb0e0c3dbd7d83b56568e11a20f3edbee967fa8022" },
+      "ownerBindsDeliberatelyInvalidEvidence": { "hash": "0xfbdb24671dc7b27c4cf02136b70b836a754db30d98c6a5daf32b7c901624cad5", "status": "FINALIZED", "execution": "SUCCESS", "explorer": "https://explorer-studio.genlayer.com/tx/0xfbdb24671dc7b27c4cf02136b70b836a754db30d98c6a5daf32b7c901624cad5" },
+      "walletBAssessesInvalidEvidenceFailClosed": { "hash": "0xdc7a885121961d69f3ef8a166e98292ef8f61d273ae39521259d2bd7599cfabc", "status": "FINALIZED", "execution": "SUCCESS", "assessmentId": "e06c350c9d8f926cab3720e59d64c1c390f857c1240d3a5a453c44d4130c9c49", "verdict": "INSUFFICIENT", "statusName": "INDETERMINATE", "reasonCode": "TRANSACTION_NOT_FOUND", "explorer": "https://explorer-studio.genlayer.com/tx/0xdc7a885121961d69f3ef8a166e98292ef8f61d273ae39521259d2bd7599cfabc" },
+      "walletBAssessmentNonceReplayRejected": { "hash": "0xac25b39f45fac94e804a304dfc88376b1b6558a65992910e433713c668defe16", "status": "FINALIZED", "execution": "ERROR/ROLLBACK", "explorer": "https://explorer-studio.genlayer.com/tx/0xac25b39f45fac94e804a304dfc88376b1b6558a65992910e433713c668defe16" }
+    },
+    "finalState": { "intentCount": 1, "assessmentCount": 1, "assessment": "INDETERMINATE/INSUFFICIENT" },
+    "limitation": "Invalid transaction hashes were deliberately used to prove fail-closed behavior. The separately verified public pair emits the current event ABI unsupported by this deployed revision, and its depositor is not wallet A. No live semantic MATCH/DIVERGED result is claimed."
+  },
+  "liveConflictAudit": {
+    "date": "2026-10-20",
+    "contract": "0x5C893d0aAD68Cc5EaF9a0953C57CFea0F93B7E14",
+    "evidence": "docs/live-evidence/audit-20261020audit01.json",
+    "transactions": {
+      "walletBCreatesSameIdInOwnNamespace": { "hash": "0x3232a90449086179113f72a62414a20d0cf908d416e5aa82ac4019122b117bf0", "status": "FINALIZED", "execution": "SUCCESS", "intentCount": 2 },
+      "walletADuplicateOwnerScopedIdRollsBack": { "hash": "0x53f5b303e0233bf8bd3088ee7707197bc4eb083d27e84d447aed9e88bd58c208", "status": "FINALIZED", "execution": "ERROR/ROLLBACK", "intentCountUnchanged": true },
+      "walletAIndependentAssessmentAfterWalletBAssessment": { "hash": "0x3636e18f999ccf7a81d0a793cd518a231d0355b01c308e97a39a3bd39d4111f8", "status": "FINALIZED", "execution": "SUCCESS", "verdict": "INSUFFICIENT", "statusName": "INDETERMINATE", "reasonCode": "TRANSACTION_NOT_FOUND", "assessmentCount": 2 }
+    },
+    "result": "All three expected outcomes were observed; unrelated wallet B activity did not lock wallet A's intent or prevent a later wallet A assessment."
+  },
+  "testMatrix": [
+    "MATCH: linked successful final deposit/fill and semantic recipient/action matches goal.",
+    "DIVERGED: linked receipts but effective recipient/action conflicts with declared goal.",
+    "INDETERMINATE: malformed/unknown/reverted/non-final/noncanonical receipt, missing event, wrong chain, wrong owner, unlinked deposit ID, RPC failure, or invalid consensus schema.",
+    "Conflict: deposit/fill with mismatched deposit ID, origin/destination chain, depositor, relay fields, or base message commitment is rejected before semantic judgment.",
+    "Adversarial audit: unaffiliated caller cannot overwrite or lock an intent; each caller can submit an independent nonce and immutable assessment receipt.",
+    "Replay: repeated intent or assessment nonce is rejected; a fresh nonce allows a new independent assessment.",
+    "Prompt injection: hostile goal text is treated as untrusted data; untrusted Across message bytes are not forwarded to the LLM."
+  ],
+  "primarySources": [
+    "https://docs.across.to/introduction/tracking-deposits",
+    "https://docs.across.to/guides/migration/v2-to-v3",
+    "https://github.com/UMAprotocol/UMIPs/blob/master/UMIPs/umip-179.md",
+    "https://docs.genlayer.com/developers/intelligent-contracts/features/non-determinism",
+    "https://docs.genlayer.com/understand-genlayer-protocol/core-concepts/web-data-access"
+  ]
+}

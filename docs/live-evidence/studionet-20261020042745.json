@@ -1,0 +1,327 @@
+{
+  "project": "BridgeIntent",
+  "run": "20261020042745",
+  "network": "GenLayer StudioNet",
+  "chain_id": 61999,
+  "contract": "0x6d253BE5ABf1e490d004FaB72379CFE54a27B2c3",
+  "source_parity": {
+    "byte_for_byte": true,
+    "byte_length": 26761,
+    "local_sha256": "9c2e8881666ad1408e9bab43f5e0cebf2c26dbb42fe792121ef34b4eeeed7c37",
+    "deployed_sha256": "9c2e8881666ad1408e9bab43f5e0cebf2c26dbb42fe792121ef34b4eeeed7c37"
+  },
+  "signing_method": "GenLayerJS SDK; authorized test-account keys read in memory from GenLayer CLI OS keychain.",
+  "actors": {
+    "walletA": "0xeb57bc7125fa60d7482CE12058397369AB3581f8",
+    "walletB": "0x2da5393d7BBb9A037dc3abB56DbbC5C150fc843f"
+  },
+  "scope": "Live schema-v2 create, unauthorized-binder rejection, invalid-receipt fail-closed assessment, nonce replay rejection, and finalized state readback. Not a valid-receipt MATCH/DIVERGED test.",
+  "started_at": "2026-10-20T04:27:45.417Z",
+  "steps": [
+    {
+      "label": "wallet-a-create-intent",
+      "function": "create_intent",
+      "args": [
+        "live-20261020042745",
+        "42161",
+        "8453",
+        "Recipient receives the declared destination asset",
+        "create-20261020042745"
+      ],
+      "hash": "0xc37c1b0c78a1928e559b9008d57d2b4339ffafbf339ff5abd3f0184f2a8a543a",
+      "stats_before": {
+        "assessment_count": 0,
+        "intent_count": 0
+      },
+      "submitted_at": "2026-10-20T04:27:51.841Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "leader_status": "return",
+      "stats_after": {
+        "assessment_count": 0,
+        "intent_count": 1
+      },
+      "at": "2026-10-20T04:29:28.369Z"
+    },
+    {
+      "label": "wallet-b-cannot-bind-wallet-a-intent",
+      "function": "bind_evidence",
+      "args": [
+        "0xeb57bc7125fa60d7482ce12058397369ab3581f8",
+        "live-20261020042745",
+        "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      ],
+      "hash": "0xd48f390fab6fbd181df0a2f5adaedf99e06145135221b65c30795541ec5fd593",
+      "stats_before": {
+        "assessment_count": 0,
+        "intent_count": 1
+      },
+      "submitted_at": "2026-10-20T04:28:30.547Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "ERROR",
+      "leader_status": "rollback",
+      "at": "2026-10-20T04:29:31.916Z",
+      "stats_after": {
+        "assessment_count": 0,
+        "intent_count": 1
+      }
+    },
+    {
+      "label": "wallet-a-bind-deliberately-fake-receipts",
+      "function": "bind_evidence",
+      "args": [
+        "0xeb57bc7125fa60d7482ce12058397369ab3581f8",
+        "live-20261020042745",
+        "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      ],
+      "hash": "0x06c1fb308a4881735b0c211fb33bd9d27b3e0dad1b819eacb209af89c322bf8b",
+      "stats_before": {
+        "assessment_count": 0,
+        "intent_count": 1
+      },
+      "submitted_at": "2026-10-20T04:29:34.999Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "leader_status": "return",
+      "stats_after": {
+        "assessment_count": 0,
+        "intent_count": 1
+      },
+      "at": "2026-10-20T04:30:11.972Z"
+    },
+    {
+      "label": "wallet-b-assess-fake-receipts-fail-closed",
+      "function": "assess",
+      "args": [
+        "0xeb57bc7125fa60d7482ce12058397369ab3581f8",
+        "live-20261020042745",
+        "assess-20261020042745"
+      ],
+      "hash": "0x82dcea143b7856d29e5a4a0b03cf3bb840a61a2b1a5a75789563ceb39f8c1bda",
+      "stats_before": {
+        "assessment_count": 0,
+        "intent_count": 1
+      },
+      "submitted_at": "2026-10-20T04:30:15.077Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "leader_status": "return",
+      "stats_after": {
+        "assessment_count": 1,
+        "intent_count": 1
+      },
+      "at": "2026-10-20T04:30:58.033Z"
+    },
+    {
+      "label": "wallet-b-replayed-assessment-nonce-rejected",
+      "function": "assess",
+      "args": [
+        "0xeb57bc7125fa60d7482ce12058397369ab3581f8",
+        "live-20261020042745",
+        "assess-20261020042745"
+      ],
+      "hash": "0xf3eb54e53daa64bca0dd7d60704546834bbbbdbe6736101ffee5663b8c43caa4",
+      "stats_before": {
+        "assessment_count": 1,
+        "intent_count": 1
+      },
+      "submitted_at": "2026-10-20T04:31:02.390Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "ERROR",
+      "leader_status": "rollback",
+      "stats_after": {
+        "assessment_count": 1,
+        "intent_count": 1
+      },
+      "at": "2026-10-20T04:31:39.854Z"
+    }
+  ],
+  "assertions": [
+    {
+      "name": "schema matches BridgeIntent v2",
+      "pass": true,
+      "details": {
+        "schema": "bridgeintent/2"
+      },
+      "at": "2026-10-20T04:29:24.674Z"
+    },
+    {
+      "name": "wallet-a-create-intent: successful finalized execution",
+      "pass": true,
+      "details": {
+        "hash": "0xc37c1b0c78a1928e559b9008d57d2b4339ffafbf339ff5abd3f0184f2a8a543a",
+        "status": "FINALIZED",
+        "consensus": "MAJORITY_AGREE",
+        "execution": "SUCCESS",
+        "leader_status": "return"
+      },
+      "at": "2026-10-20T04:29:28.370Z"
+    },
+    {
+      "name": "wallet-b-cannot-bind-wallet-a-intent: expected failed finalized execution",
+      "pass": true,
+      "details": {
+        "hash": "0xd48f390fab6fbd181df0a2f5adaedf99e06145135221b65c30795541ec5fd593",
+        "status": "FINALIZED",
+        "consensus": "MAJORITY_AGREE",
+        "execution": "ERROR",
+        "leader_status": "rollback"
+      },
+      "at": "2026-10-20T04:29:31.917Z"
+    },
+    {
+      "name": "unauthorized binder causes no state mutation",
+      "pass": true,
+      "details": {
+        "before": {
+          "assessment_count": 0,
+          "intent_count": 1
+        },
+        "after": {
+          "assessment_count": 0,
+          "intent_count": 1
+        }
+      },
+      "at": "2026-10-20T04:29:31.917Z"
+    },
+    {
+      "name": "wallet-a-bind-deliberately-fake-receipts: successful finalized execution",
+      "pass": true,
+      "details": {
+        "hash": "0x06c1fb308a4881735b0c211fb33bd9d27b3e0dad1b819eacb209af89c322bf8b",
+        "status": "FINALIZED",
+        "consensus": "MAJORITY_AGREE",
+        "execution": "SUCCESS",
+        "leader_status": "return"
+      },
+      "at": "2026-10-20T04:30:11.973Z"
+    },
+    {
+      "name": "wallet-b-assess-fake-receipts-fail-closed: successful finalized execution",
+      "pass": true,
+      "details": {
+        "hash": "0x82dcea143b7856d29e5a4a0b03cf3bb840a61a2b1a5a75789563ceb39f8c1bda",
+        "status": "FINALIZED",
+        "consensus": "MAJORITY_AGREE",
+        "execution": "SUCCESS",
+        "leader_status": "return"
+      },
+      "at": "2026-10-20T04:30:58.034Z"
+    },
+    {
+      "name": "invalid receipt hashes produce fail-closed INDETERMINATE result",
+      "pass": true,
+      "details": {
+        "status": "INDETERMINATE",
+        "verdict": "INSUFFICIENT",
+        "reason": "Consensus could not establish the destination action from the supplied receipts. TRANSACTION_NOT_FOUND"
+      },
+      "at": "2026-10-20T04:30:59.369Z"
+    },
+    {
+      "name": "assessment readback matches signer and intent owner",
+      "pass": true,
+      "details": {
+        "assessor": "0x2da5393d7bbb9a037dc3abb56dbbc5c150fc843f",
+        "intent_owner": "0xeb57bc7125fa60d7482ce12058397369ab3581f8"
+      },
+      "at": "2026-10-20T04:30:59.369Z"
+    },
+    {
+      "name": "wallet-b-replayed-assessment-nonce-rejected: expected failed finalized execution",
+      "pass": true,
+      "details": {
+        "hash": "0xf3eb54e53daa64bca0dd7d60704546834bbbbdbe6736101ffee5663b8c43caa4",
+        "status": "FINALIZED",
+        "consensus": "MAJORITY_AGREE",
+        "execution": "ERROR",
+        "leader_status": "rollback"
+      },
+      "at": "2026-10-20T04:31:39.855Z"
+    },
+    {
+      "name": "replayed assessment nonce leaves state unchanged",
+      "pass": true,
+      "details": {
+        "before": {
+          "assessment_count": 1,
+          "intent_count": 1
+        },
+        "after": {
+          "assessment_count": 1,
+          "intent_count": 1
+        }
+      },
+      "at": "2026-10-20T04:31:39.856Z"
+    },
+    {
+      "name": "finalized intent state matches submitted evidence",
+      "pass": true,
+      "details": {
+        "evidence_bound": true,
+        "deposit_tx": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "fill_tx": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "at": "2026-10-20T04:31:42.503Z"
+    },
+    {
+      "name": "only accepted create and assessment advanced counts",
+      "pass": true,
+      "details": {
+        "initial": {
+          "assessment_count": 0,
+          "intent_count": 0
+        },
+        "final": {
+          "assessment_count": 1,
+          "intent_count": 1
+        }
+      },
+      "at": "2026-10-20T04:31:42.504Z"
+    }
+  ],
+  "schema": "bridgeintent/2",
+  "initial_stats": {
+    "assessment_count": 0,
+    "intent_count": 0
+  },
+  "intent_id": "live-20261020042745",
+  "completed_at": "2026-10-20T04:31:42.504Z",
+  "assessment_id": "1f096622f2784fe4a12f1dffc04b613f3b9a9b6d0747066bb160b0fd9135390f",
+  "assessment_readback": {
+    "assessment_id": "1f096622f2784fe4a12f1dffc04b613f3b9a9b6d0747066bb160b0fd9135390f",
+    "assessor": "0x2da5393d7bbb9a037dc3abb56dbbc5c150fc843f",
+    "facts_digest": "0be22cadc85b9db9ac6990da8f81dcc5996c4de5630dd5f222ff42094f763852",
+    "facts_json": "{\"boundary\":\"Receipt retrieval or semantic judgment could not be established.\",\"evidence_status\":\"INSUFFICIENT\",\"reason_code\":\"TRANSACTION_NOT_FOUND\"}",
+    "intent_id": "live-20261020042745",
+    "intent_owner": "0xeb57bc7125fa60d7482ce12058397369ab3581f8",
+    "nonce": "assess-20261020042745",
+    "reason": "Consensus could not establish the destination action from the supplied receipts. TRANSACTION_NOT_FOUND",
+    "status": "INDETERMINATE",
+    "verdict": "INSUFFICIENT"
+  },
+  "intent_readback": {
+    "deposit_tx": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "destination_chain_id": 8453,
+    "evidence_bound": true,
+    "expected_action": "Recipient receives the declared destination asset",
+    "fill_tx": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "intent_digest": "7395994cef839ae99c3dbae8237c3268d0bde64041bd1b61159976dabec847ed",
+    "intent_id": "live-20261020042745",
+    "origin_chain_id": 42161,
+    "owner": "0xeb57bc7125fa60d7482ce12058397369ab3581f8"
+  },
+  "final_stats": {
+    "assessment_count": 1,
+    "intent_count": 1
+  },
+  "all_assertions_pass": true,
+  "outcome": "live_fail_closed_and_authorization_e2e_verified"
+}

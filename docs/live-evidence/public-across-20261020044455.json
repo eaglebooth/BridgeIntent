@@ -1,0 +1,104 @@
+{
+  "project": "BridgeIntent",
+  "run": "20261020044455",
+  "mode": "diverged",
+  "expected_verdict": "DIVERGED",
+  "network": "GenLayer StudioNet",
+  "chain_id": 61999,
+  "contract": "0x6d253BE5ABf1e490d004FaB72379CFE54a27B2c3",
+  "schema": "bridgeintent/2",
+  "source_parity": {
+    "byte_for_byte": true,
+    "byte_length": 26761,
+    "sha256": "9c2e8881666ad1408e9bab43f5e0cebf2c26dbb42fe792121ef34b4eeeed7c37"
+  },
+  "source_receipts": {
+    "deposit": {
+      "hash": "0x56a86610aad2a653161c9dd4b4972f948198fd02ae9589cfac1d57bd86a156c1",
+      "chain": "Arbitrum One",
+      "explorer": "https://arbiscan.io/tx/0x56a86610aad2a653161c9dd4b4972f948198fd02ae9589cfac1d57bd86a156c1"
+    },
+    "fill": {
+      "hash": "0x7965d6064d8bee154d1c5471672180f5f802f789e22f66d54102a2010121a93e",
+      "chain": "Base",
+      "explorer": "https://basescan.org/tx/0x7965d6064d8bee154d1c5471672180f5f802f789e22f66d54102a2010121a93e"
+    }
+  },
+  "actors": {
+    "submitter": "0xeb57bc7125fa60d7482CE12058397369AB3581f8",
+    "reviewer": "0x2da5393d7BBb9A037dc3abB56DbbC5C150fc843f"
+  },
+  "intent_id": "public-across-20261020044455",
+  "goal": "The Base fill delivers 9.997517 USDC to recipient 0x0000000000000000000000000000000000000001.",
+  "transactions": [
+    {
+      "label": "wallet-a-create-public-case",
+      "function": "create_intent",
+      "hash": "0x3fd2ec44e2b1b6760cd93f4a1b59d919b74fcd79678c060ad7f965f29cc3f133",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x3fd2ec44e2b1b6760cd93f4a1b59d919b74fcd79678c060ad7f965f29cc3f133",
+      "submitted_at": "2026-10-20T04:44:59.049Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "finalized_at": "2026-10-20T07:08:09.443Z"
+    },
+    {
+      "label": "wallet-a-bind-public-across-receipts",
+      "function": "bind_evidence",
+      "hash": "0xc04b97ad8af21c36855ec9bb454932e325437af19a3a43a7c1d47344cd055883",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0xc04b97ad8af21c36855ec9bb454932e325437af19a3a43a7c1d47344cd055883",
+      "submitted_at": "2026-10-20T07:08:11.254Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "finalized_at": "2026-10-20T07:08:46.439Z"
+    },
+    {
+      "label": "wallet-b-assess-public-across-receipts",
+      "function": "assess",
+      "hash": "0xeb50cdbf8cf5a90c0c9b56de61ead601f2f13c1ad0044d1ae459dcd7cffd4a4f",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0xeb50cdbf8cf5a90c0c9b56de61ead601f2f13c1ad0044d1ae459dcd7cffd4a4f",
+      "submitted_at": "2026-10-20T07:08:48.500Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "finalized_at": "2026-10-20T07:09:35.827Z"
+    }
+  ],
+  "started_at": "2026-10-20T04:44:55.726Z",
+  "stats_before": {
+    "assessment_count": 3,
+    "intent_count": 4
+  },
+  "intent_readback": {
+    "deposit_tx": "0x56a86610aad2a653161c9dd4b4972f948198fd02ae9589cfac1d57bd86a156c1",
+    "destination_chain_id": 8453,
+    "evidence_bound": true,
+    "expected_action": "The Base fill delivers 9.997517 USDC to recipient 0x0000000000000000000000000000000000000001.",
+    "fill_tx": "0x7965d6064d8bee154d1c5471672180f5f802f789e22f66d54102a2010121a93e",
+    "intent_digest": "7c1efe290e5a3e2ff9629c977725bdfcbd5edc57550cf6573800347cf68aab61",
+    "intent_id": "public-across-20261020044455",
+    "origin_chain_id": 42161,
+    "owner": "0xeb57bc7125fa60d7482ce12058397369ab3581f8"
+  },
+  "assessment_readback": {
+    "assessment_id": "b83796f833aecc3bda9aa2be844d9b9c73ead0e4d12381529be08379f8b0be96",
+    "assessor": "0x2da5393d7bbb9a037dc3abb56dbbc5c150fc843f",
+    "facts_digest": "c672547ec85fcf2010173162def2af57fa6c3aeb1d85ef1a6bd57ccff5004f6f",
+    "facts_json": "{\"boundary\":\"The case submitter is only the caller who registered this public receipt pair, not an authenticated depositor or transaction owner. This validates one Across V3 EVM deposit/fill pair; it does not prove intent provenance, bridge solvency, refund status, or any fact not present in these transaction receipts.\",\"case_submitter\":\"0xeb57bc7125fa60d7482ce12058397369ab3581f8\",\"deposit\":{\"deposit_id\":\"3379116\",\"depositor\":\"0xa4d353bbc130cbef1811f27ac70989f9d568ceab\",\"destination_chain_id\":\"8453\",\"exclusive_relayer\":\"0xcad97616f91872c02ba3553db315db4015cbe850\",\"exclusivity_deadline\":\"1747468491\",\"fill_deadline\":\"1747480169\",\"input_amount\":\"10000000\",\"input_token\":\"0xaf88d065e77c8cc2239327c5edb3a432268e5831\",\"message_hash\":\"0x0000000000000000000000000000000000000000000000000000000000000000\",\"output_token\":\"0x833589fcd6edb6e08f4c7c32d4f71b54bda02913\",\"quoted_output_amount\":\"9997517\",\"recipient\":\"0xa4d353bbc130cbef1811f27ac70989f9d568ceab\"},\"destination_chain\":\"Base\",\"destination_transaction\":{\"block_hash\":\"0x2d32511405b3ae0e443b27920caf13c8f6ecc08a3220e04ed0462d213470535c\",\"block_number\":30339571,\"chain_id\":8453,\"finality_tag\":\"finalized\",\"from\":\"0xcad97616f91872c02ba3553db315db4015cbe850\",\"status\":\"SUCCESS\",\"to\":\"0x09aea4b2242abc8bb4bb78d537a67a245a7bec64\",\"tx_hash\":\"0x7965d6064d8bee154d1c5471672180f5f802f789e22f66d54102a2010121a93e\"},\"fill\":{\"base_message_hash\":\"0x0000000000000000000000000000000000000000000000000000000000000000\",\"deposit_id\":\"3379116\",\"depositor\":\"0xa4d353bbc130cbef1811f27ac70989f9d568ceab\",\"effective_message_hash\":\"0x0000000000000000000000000000000000000000000000000000000000000000\",\"effective_output_amount\":\"9997517\",\"effective_recipient\":\"0xa4d353bbc130cbef1811f27ac70989f9d568ceab\",\"exclusive_relayer\":\"0xcad97616f91872c02ba3553db315db4015cbe850\",\"exclusivity_deadline\":\"1747468491\",\"fill_deadline\":\"1747480169\",\"fill_type\":\"FAST_FILL\",\"input_amount\":\"10000000\",\"input_token\":\"0xaf88d065e77c8cc2239327c5edb3a432268e5831\",\"origin_chain_id\":\"42161\",\"output_amount\":\"9997517\",\"output_token\":\"0x833589fcd6edb6e08f4c7c32d4f71b54bda02913\",\"recipient\":\"0xa4d353bbc130cbef1811f27ac70989f9d568ceab\",\"relayer\":\"0xcad97616f91872c02ba3553db315db4015cbe850\"},\"link_checks\":{\"base_message_hash_matches_across_receipts\":true,\"both_receipts_successful_and_final\":true,\"deposit_id_and_origin_destination_chains_match\":true,\"depositor_and_required_relay_fields_match_across_receipts\":true,\"known_spoke_pools\":true},\"origin_chain\":\"Arbitrum One\",\"origin_transaction\":{\"block_hash\":\"0x74e601d182a999a08f469a00374d37689fb6c28cd98cfcb0c1e448d752822647\",\"block_number\":337558392,\"chain_id\":42161,\"finality_tag\":\"finalized\",\"from\":\"0xa4d353bbc130cbef1811f27ac70989f9d568ceab\",\"status\":\"SUCCESS\",\"to\":\"0xe35e9842fceaca96570b734083f4a58e8f7c5f2a\",\"tx_hash\":\"0x56a86610aad2a653161c9dd4b4972f948198fd02ae9589cfac1d57bd86a156c1\"},\"protocol\":\"Across V3 EVM\"}",
+    "intent_id": "public-across-20261020044455",
+    "intent_owner": "0xeb57bc7125fa60d7482ce12058397369ab3581f8",
+    "nonce": "assess-20261020044455",
+    "reason": "Consensus found the receipt-grounded destination action materially different from the declared goal.",
+    "status": "ASSESSED",
+    "verdict": "DIVERGED"
+  },
+  "final_stats": {
+    "assessment_count": 4,
+    "intent_count": 4
+  },
+  "assessment_id": "b83796f833aecc3bda9aa2be844d9b9c73ead0e4d12381529be08379f8b0be96",
+  "expected_verdict_pass": true,
+  "outcome": "live_public_pair_diverged_verified",
+  "completed_at": "2026-10-20T07:09:39.855Z"
+}

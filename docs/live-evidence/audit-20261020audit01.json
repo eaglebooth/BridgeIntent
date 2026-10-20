@@ -1,0 +1,124 @@
+{
+  "project": "BridgeIntent",
+  "run": "20261020audit01",
+  "contract": "0x5C893d0aAD68Cc5EaF9a0953C57CFea0F93B7E14",
+  "network": "GenLayer StudioNet",
+  "chain_id": 61999,
+  "note": "Live conflict/adversarial follow-up against the user-provided deployed revision. This deployed revision predates local support for current Across FundsDeposited/FilledRelay topics.",
+  "actors": {
+    "walletA": "0xeb57bc7125fa60d7482CE12058397369AB3581f8",
+    "walletB": "0x2da5393d7BBb9A037dc3abB56DbbC5C150fc843f"
+  },
+  "started_at": "2026-10-20T03:16:36.073Z",
+  "steps": [
+    {
+      "label": "wallet-b-creates-same-id-in-independent-owner-namespace",
+      "method": "create_intent",
+      "args": [
+        "live-20261020024950",
+        "42161",
+        "8453",
+        "An independent declaration for the same public identifier",
+        "audit-b-create-namespace"
+      ],
+      "hash": "0x3232a90449086179113f72a62414a20d0cf908d416e5aa82ac4019122b117bf0",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x3232a90449086179113f72a62414a20d0cf908d416e5aa82ac4019122b117bf0",
+      "stats_before": {
+        "assessment_count": 1,
+        "intent_count": 1
+      },
+      "submitted_at": "2026-10-20T03:16:42.861Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "leader_status": "return",
+      "stats_after": {
+        "assessment_count": 1,
+        "intent_count": 2
+      },
+      "expected_result": "SUCCESS",
+      "pass": true,
+      "readback_owner": "0x2da5393d7bbb9a037dc3abb56dbbc5c150fc843f",
+      "readback_intent_id": "live-20261020024950"
+    },
+    {
+      "label": "wallet-a-duplicate-intent-id-conflicts",
+      "method": "create_intent",
+      "args": [
+        "live-20261020024950",
+        "42161",
+        "8453",
+        "A duplicate owner-scoped declaration must revert",
+        "audit-a-duplicate"
+      ],
+      "hash": "0x53f5b303e0233bf8bd3088ee7707197bc4eb083d27e84d447aed9e88bd58c208",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x53f5b303e0233bf8bd3088ee7707197bc4eb083d27e84d447aed9e88bd58c208",
+      "stats_before": {
+        "assessment_count": 1,
+        "intent_count": 2
+      },
+      "submitted_at": "2026-10-20T03:17:26.286Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "ERROR",
+      "leader_status": "rollback",
+      "stats_after": {
+        "assessment_count": 1,
+        "intent_count": 2
+      },
+      "expected_result": "ROLLBACK",
+      "pass": true
+    },
+    {
+      "label": "wallet-a-independent-assessment-after-wallet-b-assessment",
+      "method": "assess",
+      "args": [
+        "0xeb57bc7125fa60d7482ce12058397369ab3581f8",
+        "live-20261020024950",
+        "audit-a-independent-assessment"
+      ],
+      "hash": "0x3636e18f999ccf7a81d0a793cd518a231d0355b01c308e97a39a3bd39d4111f8",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x3636e18f999ccf7a81d0a793cd518a231d0355b01c308e97a39a3bd39d4111f8",
+      "stats_before": {
+        "assessment_count": 1,
+        "intent_count": 2
+      },
+      "submitted_at": "2026-10-20T03:18:05.326Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "leader_status": "return",
+      "stats_after": {
+        "assessment_count": 2,
+        "intent_count": 2
+      },
+      "expected_result": "SUCCESS",
+      "pass": true,
+      "assessment_id": "56f9cae4eb857f6e2f1e1a7ed570e6cf25f1eb8534b37dd151d8fd241370c796",
+      "assessment_readback": {
+        "assessment_id": "56f9cae4eb857f6e2f1e1a7ed570e6cf25f1eb8534b37dd151d8fd241370c796",
+        "assessor": "0xeb57bc7125fa60d7482ce12058397369ab3581f8",
+        "facts_digest": "0be22cadc85b9db9ac6990da8f81dcc5996c4de5630dd5f222ff42094f763852",
+        "facts_json": "{\"boundary\":\"Receipt retrieval or semantic judgment could not be established.\",\"evidence_status\":\"INSUFFICIENT\",\"reason_code\":\"TRANSACTION_NOT_FOUND\"}",
+        "intent_id": "live-20261020024950",
+        "intent_owner": "0xeb57bc7125fa60d7482ce12058397369ab3581f8",
+        "nonce": "audit-a-independent-assessment",
+        "reason": "Consensus could not establish the destination action from the supplied receipts. TRANSACTION_NOT_FOUND",
+        "status": "INDETERMINATE",
+        "verdict": "INSUFFICIENT"
+      }
+    }
+  ],
+  "initial_stats": {
+    "assessment_count": 1,
+    "intent_count": 1
+  },
+  "schema": "bridgeintent/1",
+  "final_stats": {
+    "assessment_count": 2,
+    "intent_count": 2
+  },
+  "completed_at": "2026-10-20T03:18:50.038Z",
+  "all_steps_pass": true,
+  "outcome": "owner_scoped_id_conflict_and_independent_assessment_verified"
+}

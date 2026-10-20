@@ -1,0 +1,67 @@
+{
+  "project": "BridgeIntent",
+  "checked_at": "2026-10-20T03:13:44.731Z",
+  "source": "Across documentation example hashes independently queried from Arbitrum One and Base JSON-RPC.",
+  "event_abi": {
+    "deposit": {
+      "name": "FundsDeposited",
+      "topic0": "0x32ed1a409ef04c7b0227189c3a103dc5ac10e775a15b785dcc510201f7c25ad3"
+    },
+    "fill": {
+      "name": "FilledRelay",
+      "topic0": "0x44b559f101f8fbcc8a0ea43fa91a05a729a5ea6e14a7c75aa750374690137208"
+    }
+  },
+  "deposit_tx": {
+    "hash": "0x56a86610aad2a653161c9dd4b4972f948198fd02ae9589cfac1d57bd86a156c1",
+    "explorer": "https://arbiscan.io/tx/0x56a86610aad2a653161c9dd4b4972f948198fd02ae9589cfac1d57bd86a156c1",
+    "chain": "Arbitrum One",
+    "status": "0x1",
+    "block": "0x141ebb78",
+    "block_hash": "0x74e601d182a999a08f469a00374d37689fb6c28cd98cfcb0c1e448d752822647",
+    "sender": "0xa4d353bbc130cbef1811f27ac70989f9d568ceab",
+    "event": {
+      "destination_chain_id": "8453",
+      "deposit_id": "3379116",
+      "depositor": "0xa4d353bbc130cbef1811f27ac70989f9d568ceab",
+      "input_token": "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
+      "output_token": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+      "input_amount": "10000000",
+      "quoted_output_amount": "9997517",
+      "fill_deadline": "1747480169",
+      "exclusivity_deadline": "1747468491",
+      "recipient": "0xa4d353bbc130cbef1811f27ac70989f9d568ceab",
+      "exclusive_relayer": "0xcad97616f91872c02ba3553db315db4015cbe850"
+    }
+  },
+  "fill_tx": {
+    "hash": "0x7965d6064d8bee154d1c5471672180f5f802f789e22f66d54102a2010121a93e",
+    "explorer": "https://basescan.org/tx/0x7965d6064d8bee154d1c5471672180f5f802f789e22f66d54102a2010121a93e",
+    "chain": "Base",
+    "status": "0x1",
+    "block": "0x1cef1f3",
+    "block_hash": "0x2d32511405b3ae0e443b27920caf13c8f6ecc08a3220e04ed0462d213470535c",
+    "sender": "0xcad97616f91872c02ba3553db315db4015cbe850",
+    "event": {
+      "origin_chain_id": "42161",
+      "deposit_id": "3379116",
+      "relayer": "0xcad97616f91872c02ba3553db315db4015cbe850",
+      "input_token": "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
+      "output_token": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+      "input_amount": "10000000",
+      "output_amount": "9997517",
+      "fill_deadline": "1747480169",
+      "exclusivity_deadline": "1747468491",
+      "exclusive_relayer": "0xcad97616f91872c02ba3553db315db4015cbe850",
+      "depositor": "0xa4d353bbc130cbef1811f27ac70989f9d568ceab",
+      "recipient": "0xa4d353bbc130cbef1811f27ac70989f9d568ceab"
+    }
+  },
+  "linkage": {
+    "deposit_id_match": true,
+    "route_match": true,
+    "depositor_match": true,
+    "required_relay_fields_match": true
+  },
+  "constraint": "These are real, linked, finalized public receipts. Their depositor is not either historical StudioNet test wallet, so schema v1 cannot use them under its old submitter-equals-depositor rule. Schema v2 intentionally separates the public-case submitter from the receipt depositor; this source-chain verification alone is not a live GenLayer MATCH/DIVERGED result."
+}
